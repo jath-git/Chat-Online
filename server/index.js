@@ -1,3 +1,4 @@
+const { Socket } = require('dgram');
 const express = require('express');
 const http = require('http');
 const socketio = require('socket.io');
@@ -9,11 +10,25 @@ const io = socketio(server);
 const router = require('./router');
 
 io.on('connection', socket => {
-    console.log('we have a new connection');
-
     socket.on('join', ({ name, room }, onJoin) => {
-        console.log(name, room);
+        const { error, user } = addUser({ id: socket.id, name, room });
+        if (error) {
+            return onJoin(error);
+        }
+
+        socket.emit('message', { user: 'admin', test: `${user.name}, welcome to the room, ${user.room}` });
+        socket.broadcast.to(user.room).emit('message', { user })
+        socket.join(user.room);
+        onJoin();
     });
+
+    socket.join('sendMessage', (message, onJoin) => {
+        const user = getUser(socket.id);
+        io.to(user.room).emit('message', { user: user.name, text: message });
+        onJoin();
+    });
+
+
     socket.on('disconnect', () => {
         console.log('user had left');
     });
@@ -24,3 +39,31 @@ app.use(router);
 
 // boot server
 server.listen(port, () => console.log('server is running on ' + port));
+
+const users = [];
+const addUser = ({ id, name, room }) => {
+    name = name.trim();
+    room = name.trim();
+
+    const existUser = users.find(user => user.room === room && user.name == name);
+    if (users.find(user => user.room === room && user.name == name)) {
+        return { error: 'Username is taken' };
+    }
+
+    const user = { id, name, room };
+    users.push(user);
+
+    return { user };
+}
+
+const removeUser = id => {
+    const userIdx = users.findIndex(user => user.id === id);
+
+    if (index != -1) {
+        return users.splice(index, 1)[0];
+    }
+}
+
+const getUser = () => users.find(user => user.id === id);
+
+const getUsersInRoom = room => users.filter(user => user.room === room);

@@ -30,7 +30,7 @@ io.on('connection', socket => {
 
 
     socket.on('disconnect', () => {
-        console.log('user had left');
+        console.log('user left');
     });
 });
 

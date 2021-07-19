@@ -36,7 +36,7 @@ io.on('connection', socket => {
 
 // import requests from middleware
 app.use(router);
-// app.use('cors');
+app.use(cors());
 
 // boot server
 server.listen(port, () => console.log('server is running on ' + port));

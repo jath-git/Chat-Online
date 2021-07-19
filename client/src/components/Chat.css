@@ -1,19 +1,11 @@
-.chatOuter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #1A1A1D;
-}
-
 .chatInner {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #FFFFFF;
-  border-radius: 8px;
   height: 60%;
   width: 35%;
+  background: #FFFFFF;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 button:hover {

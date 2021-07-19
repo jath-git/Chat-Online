@@ -4,6 +4,7 @@ import InfoBar from './InfoBar.js';
 import Messages from './Messages.js';
 import Input from './Input.js';
 import './Chat.css';
+import './global.css';
 
 const port = 5000;
 // const ENDPOINT = 'https://project-chat-online-app.herokuapp.com/';
@@ -47,7 +48,7 @@ const Chat = ({ location }) => {
   }
 
   return (
-    <div className="chatOuter">
+    <div className="outer">
       <div className="chatInner">
         <InfoBar room={room} />
         <Messages messages={messages} name={name} />

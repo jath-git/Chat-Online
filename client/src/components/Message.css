@@ -1,0 +1,27 @@
+.messageContainer {
+
+}
+
+.colourWhite {
+    color: white;
+}
+
+.colourDark {
+    color: black;
+}
+
+.justifyEnd {
+    justify-content: end;
+}
+
+.backgroundBlue {
+    background-color: blue;
+}
+
+.backgroundLight {
+    background-color: white;
+}
+
+.sentText {
+    color: black;
+}

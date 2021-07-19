@@ -1,6 +1,7 @@
 const { Socket } = require('dgram');
 const express = require('express');
 const http = require('http');
+const cors = require('cors');
 const socketio = require('socket.io');
 
 const port = 5000;
@@ -36,6 +37,7 @@ io.on('connection', socket => {
 
 // import requests from middleware
 app.use(router);
+// app.use('cors');
 
 // boot server
 server.listen(port, () => console.log('server is running on ' + port));

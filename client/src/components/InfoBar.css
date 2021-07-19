@@ -1,0 +1,11 @@
+table {
+    width: 70%;
+}
+
+.left-cell {
+    text-align: left;
+}
+
+.right-cell {
+    text-align: right;
+}

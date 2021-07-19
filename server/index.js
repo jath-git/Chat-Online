@@ -1,4 +1,3 @@
-const { Socket } = require('dgram');
 const express = require('express');
 const http = require('http');
 const cors = require('cors');
@@ -43,29 +42,27 @@ app.use(router);
 server.listen(port, () => console.log('server is running on ' + port));
 
 const users = [];
+
 const addUser = ({ id, name, room }) => {
-    name = name.trim();
-    room = name.trim();
+  name = name.trim().toLowerCase();
+  room = room.trim().toLowerCase();
 
-    const existUser = users.find(user => user.room === room && user.name == name);
-    if (users.find(user => user.room === room && user.name == name)) {
-        return { error: 'Username is taken' };
-    }
+  const existingUser = users.find((user) => user.room === room && user.name === name);
 
-    const user = { id, name, room };
-    users.push(user);
+  if(!name || !room) return { error: 'Username and room are required.' };
+  if(existingUser) return { error: 'Username is taken.' };
 
-    return { user };
+  const user = { id, name, room };
+
+  users.push(user);
+
+  return { user };
 }
 
-const removeUser = id => {
-    const userIdx = users.findIndex(user => user.id === id);
+const removeUser = (id) => {
+  const index = users.findIndex((user) => user.id === id);
 
-    if (index != -1) {
-        return users.splice(index, 1)[0];
-    }
+  if(index !== -1) return users.splice(index, 1)[0];
 }
 
-const getUser = () => users.find(user => user.id === id);
-
-const getUsersInRoom = room => users.filter(user => user.room === room);
+const getUser = (id) => users.find((user) => user.id === id);

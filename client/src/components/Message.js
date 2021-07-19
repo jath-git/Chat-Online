@@ -1,29 +1,35 @@
 import React from 'react';
-import ScrollToBottom from 'react-scroll-to-bottom';
 import './Message.css';
+import ReactEmoji from 'react-emoji';
 
-const Message = ({ message: { user, text }, name }) => {
-    let isSent = false;
-    const trimmedName = name.trim().toLowerCase();
-    if (user === trimmedName) {
-        isSent = true;
-    }
+const Message = ({ message: { text, user }, name }) => {
+  let isSent = false;
 
-    return (
-        isSent
-            ? (<div className="messageContainer justifyEnd">
-                <p className="sentText">{trimmedName}</p>
-                <div className="messageBox backgroundBlue">
-                    <p className="messageText colourWhite">{text}</p>
-                </div>
-            </div>)
-            : (<div className="messageContainer justifyStart">
-                <div className="messageBox backgroundLight">
-                    <p className="messageText colourDark">{text}</p>
-                </div>
-                <p className="sentText pl-10">{trimmedName}</p>
-            </div>)
-    )
+  const trimmedName = name.trim().toLowerCase();
+
+  if(user === trimmedName) {
+    isSent = true;
+  }
+
+  return (
+    isSent
+      ? (
+        <div className="messageContainer justifyEnd">
+          <p className="sentText pr-10">{trimmedName}</p>
+          <div className="messageBox backgroundBlue">
+            <p className="messageText colorWhite">{text}</p>
+          </div>
+        </div>
+        )
+        : (
+          <div className="messageContainer justifyStart">
+            <div className="messageBox backgroundLight">
+              <p className="messageText colorDark">{text}</p>
+            </div>
+            <p className="sentText pl-10 ">{user}</p>
+          </div>
+        )
+  );
 }
 
 export default Message;

@@ -3,7 +3,6 @@ import io from 'socket.io-client';
 import InfoBar from './InfoBar.js';
 import Input from './Input.js'
 import Messages from './Messages.js'
-import './Chat.css';
 import './global.css';
 
 const port = 5000;   

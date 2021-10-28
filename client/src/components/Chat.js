@@ -7,7 +7,6 @@ import './Chat.css';
 import './global.css';
 
 const port = 5000;
-// const ENDPOINT = 'https://project-chat-online-app.herokuapp.com/';
 const endpoint = `localhost:${port}`;
 let socket;
 
